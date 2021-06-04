@@ -11,6 +11,11 @@ buildscript {
     }
 }
 
+plugins {
+    id 'org.ajoberstar.grgit' version '1.5.1'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'org.spongepowered.mixin'
@@ -48,7 +53,8 @@ minecraft {
 }
 
 repositories {
-    maven { url = 'https://repo.spongepowered.org/maven' }
+    maven { url = "https://repo.spongepowered.org/maven" }
+    flatDir { dirs "./inc" }
 }
 
 dependencies {
@@ -59,6 +65,9 @@ dependencies {
         exclude module: 'commons-io'
         exclude module: 'gson'
     }
+
+    compileOnly fg.deobf(":appliedenergistics2-rv6-stable-7")
+    compile ":appliedenergistics2-rv6-stable-7"
 }
 
 processResources {

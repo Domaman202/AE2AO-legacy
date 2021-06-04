@@ -1,4 +1,4 @@
-package com.yourname.modid.core;
+package ru.DmN.AE2AO.core;
 
 import net.minecraftforge.fml.relauncher.CoreModManager;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
