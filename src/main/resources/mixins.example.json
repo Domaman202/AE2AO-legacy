@@ -1,8 +1,8 @@
 {
   "compatibilityLevel": "JAVA_8",
-  "package": "com.yourname.modid.mixin",
+  "package": "ru.DmN.AE2AO.mixin",
   "mixins": [
-    "ru.DmN.AE2AO.mixin.MixinMinecraft"
+    "MixinMinecraft"
   ],
   "client": [],
   "server": []
