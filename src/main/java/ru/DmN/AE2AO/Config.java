@@ -1,10 +1,13 @@
 package ru.DmN.AE2AO;
 
-import codechicken.lib.packet.PacketCustom;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class Config implements Cloneable {
+public class Config implements Cloneable, IMessage {
     public Config() { }
     //
     public boolean DisableChannels = false;
@@ -34,14 +37,15 @@ public class Config implements Cloneable {
         return c;
     }
     // Networking
-    public void ofPacket(PacketCustom packet) {
-        DisableChannels = packet.readBoolean();
-        ControllerLimits = packet.readBoolean();
-        SCFD = packet.readBoolean();
-        ChatInfo = packet.readBoolean();
-        Max_X = packet.readInt();
-        Max_Y = packet.readInt();
-        Max_Z = packet.readInt();
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        DisableChannels = buf.readBoolean();
+        ControllerLimits = buf.readBoolean();
+        SCFD = buf.readBoolean();
+        ChatInfo = buf.readBoolean();
+        Max_X = buf.readInt();
+        Max_Y = buf.readInt();
+        Max_Z = buf.readInt();
 
         if (ChatInfo) {
             Minecraft.getMinecraft().player.sendMessage(new TextComponentString(
@@ -55,14 +59,21 @@ public class Config implements Cloneable {
         }
     }
 
-    public PacketCustom toPacket(PacketCustom packet) {
-        packet.writeBoolean(DisableChannels);
-        packet.writeBoolean(ControllerLimits);
-        packet.writeBoolean(SCFD);
-        packet.writeBoolean(ChatInfo);
-        packet.writeInt(Max_X);
-        packet.writeInt(Max_Y);
-        packet.writeInt(Max_Z);
-        return packet;
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeBoolean(DisableChannels);
+        buf.writeBoolean(ControllerLimits);
+        buf.writeBoolean(SCFD);
+        buf.writeBoolean(ChatInfo);
+        buf.writeInt(Max_X);
+        buf.writeInt(Max_Y);
+        buf.writeInt(Max_Z);
+    }
+
+    public static class Handler implements IMessageHandler<Config, IMessage> {
+        @Override
+        public IMessage onMessage(Config message, MessageContext ctx) {
+            return null;
+        }
     }
 }
