@@ -15,6 +15,7 @@ import java.util.Map;
 public class CoreMod implements IFMLLoadingPlugin {
 
     public CoreMod() {
+        //
         MixinBootstrap.init();
 
         CodeSource codeSource = this.getClass().getProtectionDomain().getCodeSource();

@@ -57,6 +57,7 @@ repositories {
     flatDir { dirs "./inc" }
 }
 
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
@@ -68,6 +69,7 @@ dependencies {
 
     compileOnly fg.deobf(":appliedenergistics2-rv6-stable-7")
     compile ":appliedenergistics2-rv6-stable-7"
+    compile ":CodeChickenLib-1.12.2-3.2.3.358-universal"
 }
 
 processResources {

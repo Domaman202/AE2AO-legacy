@@ -11,6 +11,6 @@
   "credits": "DomamaN202",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": [ "appliedenergistics2" ]
+  "dependencies": [ "appliedenergistics2", "codechickenlib" ]
 }
 ]

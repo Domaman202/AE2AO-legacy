@@ -1,9 +1,0 @@
-{
-  "compatibilityLevel": "JAVA_8",
-  "package": "ru.DmN.AE2AO.mixin",
-  "mixins": [
-    "MixinMinecraft"
-  ],
-  "client": [],
-  "server": []
-}
