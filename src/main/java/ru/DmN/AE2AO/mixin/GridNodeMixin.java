@@ -1,20 +1,19 @@
 package ru.DmN.AE2AO.mixin;
 
+import appeng.api.networking.IGridBlock;
 import appeng.me.GridNode;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 import ru.DmN.AE2AO.Main;
 
-@Mixin(value = GridNode.class, remap = false)
-public class GridNodeMixin {
-    @Shadow private int usedChannels;
+public class GridNodeMixin extends GridNode {
+    private int usedChannels;
+
+    public GridNodeMixin(IGridBlock what) { super(what); }
 
     /**
      * @author DomamaN202
      * @reason Add system turn off channels
      */
-    @Overwrite private int getUsedChannels()
+    private int getUsedChannels()
     {
         return Main.lc.DisableChannels ? 1 : usedChannels;
     }

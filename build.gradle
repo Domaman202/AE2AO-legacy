@@ -68,7 +68,10 @@ dependencies {
     }
 
     compileOnly fg.deobf(":appliedenergistics2-rv6-stable-7")
-    compile ":appliedenergistics2-rv6-stable-7"
+    runtimeOnly ":appliedenergistics2-rv6-stable-7"
+
+    // https://mvnrepository.com/artifact/javassist/javassist
+    implementation group: 'javassist', name: 'javassist', version: '3.12.1.GA'
 }
 
 processResources {

@@ -5,27 +5,25 @@ import appeng.api.networking.IGridNode;
 import appeng.me.pathfinding.ControllerValidator;
 import appeng.tile.networking.TileController;
 import net.minecraft.util.math.BlockPos;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 import ru.DmN.AE2AO.Main;
 
-@Mixin(value = ControllerValidator.class, remap = false)
-public class ControllerValidatorMixin {
-    @Shadow private boolean isValid;
-    @Shadow private int found;
-    @Shadow private int minX;
-    @Shadow private int minY;
-    @Shadow private int minZ;
-    @Shadow private int maxX;
-    @Shadow private int maxY;
-    @Shadow private int maxZ;
+public class ControllerValidatorMixin extends ControllerValidator {
+    private boolean isValid;
+    private int found;
+    private int minX;
+    private int minY;
+    private int minZ;
+    private int maxX;
+    private int maxY;
+    private int maxZ;
+
+    public ControllerValidatorMixin(int x, int y, int z) { super(x, y, z); }
 
     /**
      * @author DomamaN202
      * @reason Adding a size customization
      */
-    @Overwrite public boolean visitNode(IGridNode n) {
+    public boolean visitNode(IGridNode n) {
         IGridHost h = n.getMachine();
 
         if (isValid && h instanceof TileController) {

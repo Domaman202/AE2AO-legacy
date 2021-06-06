@@ -9,26 +9,23 @@ import appeng.api.util.DimensionalCoord;
 import appeng.me.cache.PathGridCache;
 import appeng.me.pathfinding.ControllerValidator;
 import appeng.tile.networking.TileController;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 import ru.DmN.AE2AO.Main;
 
 import java.util.Set;
 
-@Mixin(value = PathGridCache.class, remap = false)
-public class PathGridCacheMixin {
-    @Final @Shadow  private Set<TileController>         controllers;
-    @Final @Shadow  private IGrid                       myGrid;
-    @Shadow         private boolean                     recalculateControllerNextTick;
-    @Shadow         private ControllerState             controllerState;
+public class PathGridCacheMixin extends PathGridCache {
+    private Set<TileController>         controllers;
+    private IGrid                       myGrid;
+    private boolean                     recalculateControllerNextTick;
+    private ControllerState             controllerState;
+
+    public PathGridCacheMixin(IGrid g) { super(g); }
 
     /**
      * @author DomamaN202
      * @reason Adding controller error system control
      */
-    @Overwrite private void recalcController() {
+    private void recalcController() {
         recalculateControllerNextTick = false;
         final ControllerState o = controllerState;
 
