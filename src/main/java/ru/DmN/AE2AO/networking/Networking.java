@@ -11,7 +11,7 @@ public class Networking {
     public static void RegisterMessages() {
         INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("ae2ao_config");
 
-        INSTANCE.registerMessage(Config.Handler.class, Config.class, 1, Side.SERVER);
-        INSTANCE.registerMessage(Config.Handler.class, Config.class, 2, Side.CLIENT);
+        INSTANCE.registerMessage(Config.SHandler.class, Config.class, 1, Side.SERVER);
+        INSTANCE.registerMessage(Config.CHandler.class, Config.class, 2, Side.CLIENT);
     }
 }

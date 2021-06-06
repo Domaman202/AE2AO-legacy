@@ -48,6 +48,11 @@ public class Config implements Cloneable, IMessage {
         Max_Z = buf.readInt();
 
         if (ChatInfo) {
+            try {
+                while (Minecraft.getMinecraft().player == null)
+                    Thread.sleep(500);
+            } catch (InterruptedException ignored)
+            { }
             Minecraft.getMinecraft().player.sendMessage(new TextComponentString(
                     "AE2AO config loaded!\nControllerLimits = " + ControllerLimits +
                             "\nDisableChannels = " + DisableChannels +
@@ -70,7 +75,14 @@ public class Config implements Cloneable, IMessage {
         buf.writeInt(Max_Z);
     }
 
-    public static class Handler implements IMessageHandler<Config, IMessage> {
+    public static class CHandler implements IMessageHandler<Config, IMessage> {
+        @Override
+        public IMessage onMessage(Config message, MessageContext ctx) {
+            return null;
+        }
+    }
+
+    public static class SHandler implements IMessageHandler<Config, IMessage> {
         @Override
         public IMessage onMessage(Config message, MessageContext ctx) {
             return null;
