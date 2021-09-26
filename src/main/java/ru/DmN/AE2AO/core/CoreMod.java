@@ -18,7 +18,12 @@ public class CoreMod implements IFMLLoadingPlugin {
     public CoreMod() throws NotFoundException, CannotCompileException {
         // Mixin "PlayerList"
         CtClass clazz = pool.get("net.minecraft.server.management.PlayerChunkMap");
-        clazz.getMethod("addPlayer", "(Lnet/minecraft/entity/player/EntityPlayerMP;)V").insertBefore("ru.DmN.AE2AO.networking.Networking.INSTANCE.sendTo(ru.DmN.AE2AO.Main.lcc, player);");
+        clazz.getMethod("addPlayer", "(Lnet/minecraft/entity/player/EntityPlayerMP;)V").insertBefore("{ru.DmN.AE2AO.networking.Networking.INSTANCE.sendTo(ru.DmN.AE2AO.Main.lcc, player);}");
+        clazz.toClass();
+        //
+        clazz = pool.get("appeng.me.pathfinding.ControllerValidator");
+        clazz.removeMethod(clazz.getMethod("visitNode", "(Lappeng/api/networking/IGridNode;)Z"));
+        clazz.addMethod(CtMethod.make("boolean visitNode(appeng.api.networking.IGridNode n){appeng.api.networking.IGridHost h=n.getMachine();if(isValid&&h instanceof appeng.tile.networking.TileController){net.minecraft.util.math.BlockPos pos=((appeng.tile.networking.TileController)h).getPos();minX=Math.min(pos.getX(),minX);maxX=Math.max(pos.getX(),maxX);minY=Math.min(pos.getY(),minY);maxY=Math.max(pos.getY(),maxY);minZ = Math.min(pos.getZ(), minZ);maxZ = Math.max(pos.getZ(),maxZ);if(maxX-minX<ru.DmN.AE2AO.Main.lc.Max_X&&maxY-minY<ru.DmN.AE2AO.Main.lc.Max_Y&&maxZ-minZ<ru.DmN.AE2AO.Main.lc.Max_Z){this.found++;return true;}isValid = false;}return false;}", clazz));
         clazz.toClass();
         // Я хз что это такое, но пусть будет
         CodeSource codeSource = this.getClass().getProtectionDomain().getCodeSource();
