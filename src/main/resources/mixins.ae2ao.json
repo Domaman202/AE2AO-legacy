@@ -1,7 +1,11 @@
 {
   "compatibilityLevel": "JAVA_8",
   "package": "ru.DmN.AE2AO.mixin",
-  "mixins": [],
-  "client": [],
-  "server": []
+  "mixins": [
+    "ControllerValidatorMixin",
+    "GridNodeMixin",
+    "PathGridCacheMixin",
+    "PlayerListMixin"
+  ],
+  "client": []
 }
